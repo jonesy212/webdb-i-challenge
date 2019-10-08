@@ -1,8 +1,51 @@
-const server = require('express').Router();
+// const express = require('express')
 
-const db = require('../data/dbConfig')
+// const db = require('../data/dbConfig')
 
-server.get('/', (req, res)=>{
+// const router = express.Router();
+
+// router.get('/', (req, res) => {
+//     console.log(req.query)
+//     db.select(req.query)
+//     .then(accts => res.status(201).json(accts))
+//     .catch(er =>{
+//         console.log(er)
+//         res.status(400).json({
+//             message:"error finding accounts"
+//         })
+//     })
+// })
+
+const express = require('express')
+
+const db = require('../data/daConfig')
+
+const router = express.Router();
+
+router.get('/', (req, es) =>{
+    console.log(req.query)
+    db.select(req.query)
+    .then(accts => res.status(201).json(accts))
+    .catch(error =>{
+        res.status(400).json({message: "error finding "})
+    })
+})
+
+// router.get('/',(req,res)=>{
+//     db.select('*').from('accounts')
+//     .then(accounts => {
+//         res.status(200).json(accounts);
+//     })
+// })
+
+router.get('/',(req,res)=>{
+    db.select('*').from('accounts')
+    .then(accounts => {
+        res.status(200).json(accounts);
+    })
+})
+
+router.get('/', (req, res)=>{
     db.select('*').from('accounts')
     .then(accounts =>{
         res.status(200).json(accounts);
@@ -12,20 +55,33 @@ server.get('/', (req, res)=>{
     })
 });
 
-server.get('/:id', (req, res) =>{
+// router.get('/:id', (req, res) =>{
+//     db.select('*')
+//     .from('accounts')
+//     .where('id', '=', req.params.id)
+//     .then(accounts =>{
+//         console.log('accounts')
+//         res.status(200).json(accounts);
+//     })
+//     .catch(error =>{
+//         res.status(500).json(error)
+//     })
+// });
+
+router.get('/:id',(req,res) => {
     db.select('*')
     .from('accounts')
     .where('id', '=', req.params.id)
-    .then(accounts =>{
+    .then(accounts => {
         console.log('accounts')
-        res.status(200).json(accounts);
+        res.status(200).json(accounts)
     })
-    .catch(error =>{
+    .catch(error => {
         res.status(500).json(error)
     })
-});
+})
 
-server.post('/', (req, res)=>{
+router.post('/', (req, res)=>{
     const accountData = req.body;
     // const test = { name: 'account-14', budget: 4000.00 }
     db('accounts')
@@ -58,7 +114,7 @@ server.post('/', (req, res)=>{
 //   });
   
     
-server.put('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     db('accounts')
     .where({id: req.params.id})
     .update(req.body)
@@ -84,7 +140,7 @@ server.put('/:id', (req, res) => {
 //   });
   
 
-server.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     db('accounts')
     .where({id: req.params.id})
     .del()
@@ -96,4 +152,4 @@ server.delete('/:id', (req, res) => {
     })
 });
 
-module.exports = server;
+module.exports = router;

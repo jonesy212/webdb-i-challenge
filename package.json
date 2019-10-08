@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "start": "node server.js"
   },
-  "repository": "https://github.com/LambdaSchool/webdb-i-challenge",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LambdaSchool/webdb-i-challenge.git"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
@@ -17,5 +21,13 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
-  }
+  },
+  "description": "## Topics",
+  "bugs": {
+    "url": "https://github.com/LambdaSchool/webdb-i-challenge/issues"
+  },
+  "homepage": "https://github.com/LambdaSchool/webdb-i-challenge#readme",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
